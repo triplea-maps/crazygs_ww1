@@ -9109,6 +9109,6 @@ The goal of this map is to create a balanced games, using the history of the fir
 ]]>
             </value>
         </property>
-        <property name="mapName" value="Big_WW1" editable="false"/>
+        <property name="mapName" value="crazygs_ww1" editable="false"/>
     </propertyList>
 </game>
