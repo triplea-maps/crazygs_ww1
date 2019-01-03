@@ -6320,8 +6320,17 @@
 	<option name="attack" value="0"/>
 	<option name="defense" value="0"/>
 	<option name="isAir" value="true"/>
-	<option name="isSuicide" value="true"/>
 	<option name="isKamikaze" value="true"/>
+
+	<option name="isAAforCombatOnly" value="true"/>
+	<option name="offensiveAttackAA" value="1"/>
+	<option name="offensiveAttackAAmaxDieSides" value="10"/>
+	<option name="maxAAattacks" value="1000"/>
+	<option name="maxRoundsAA" value="1"/>
+	<option name="mayOverStackAA" value="false"/>
+
+	<option name="typeAA" value="Gas"/>
+	<option name="targetsAA" value="Infantry:Cavalry"/>
 </attachment>
 
 <attachment name="unitAttachment" attachTo="Harbor" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
