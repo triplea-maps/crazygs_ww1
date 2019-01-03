@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE game SYSTEM "game.dtd">
 <game>
-    <info name="CrazyG's Giant World War 1" version="0.1"/>
+    <info name="CrazyG's Giant World War 1 v0.2" version="0.2"/>
     <loader javaClass="games.strategy.triplea.TripleA"/>
 	<diceSides value="12"/>
 
@@ -1012,6 +1012,8 @@
         <connection t1="Sea Zone 176" t2="Russia 02"/>
         <connection t1="Sea Zone 176" t2="Russia 03"/>
 
+        <connection t1="Sea Zone 197" t2="Turkey 01"/>
+
         <connection t1="Sea Zone 220" t2="Scapa Flow"/>
         <connection t1="Sea Zone 220" t2="Sea Zone 18"/>
         <connection t1="Sea Zone 220" t2="Sea Zone 11"/>
@@ -1713,7 +1715,6 @@
                 <connection t1="Sea Zone 28" t2="Poland 02"/>
                 <connection t1="Sea Zone 30" t2="Sweden 21"/>
                 <connection t1="Sea Zone 30" t2="Sweden 22"/>
-                <connection t1="Sea Zone 32" t2="Lithuania 01"/>
                 <connection t1="Sea Zone 32" t2="Poland 01"/>
                 <connection t1="Sea Zone 32" t2="Prussia 01"/>
                 <connection t1="Sea Zone 32" t2="Prussia 02"/>
@@ -3579,6 +3580,7 @@
 
     <resourceList>
         <resource name="PUs"/>
+        <resource name="RailroadCap"/>
     </resourceList>
 
     <playerList>
@@ -3874,26 +3876,30 @@
             <result resourceOrUnit="Transport" quantity="1"/>
         </productionRule>
 
+    <repairRule name="repairFactory">
+      <cost resource="PUs" quantity="1"/>
+      <result resourceOrUnit="Factory" quantity="1"/>
+    </repairRule>
+
+    <repairFrontier name="repair">
+      <repairRules name="repairFactory"/>
+    </repairFrontier>
 
         <!-- Production Frontiers -->
 
         <productionFrontier name="production_All">
             <frontierRules name="buyInfantry"/>
             <frontierRules name="buyLight-Artillery"/>
-            <frontierRules name="buyHeavy-Artillery"/>
             <frontierRules name="buyCavalry"/>
-            <frontierRules name="buyEntrenchment"/>
             <frontierRules name="buyGas"/>
 
             <frontierRules name="buyRecon-Plane"/>
             <frontierRules name="buyAirship"/>
 
-            <frontierRules name="buyCruiser"/>
             <frontierRules name="buyTransport"/>
-
-            <frontierRules name="buySubmarine"/>
-            <frontierRules name="buyBattlecruiser"/>
+            <frontierRules name="buyCruiser"/>
             <frontierRules name="buyDreadnought"/>
+            <frontierRules name="buySubmarine"/>
 
             <frontierRules name="buyFactory"/>
             <frontierRules name="buyTrain"/>
@@ -3910,6 +3916,16 @@
         <playerProduction player="Russia" frontier="production_All"/>
         <playerProduction player="Italy" frontier="production_All"/>
         <playerProduction player="UnitedKingdom" frontier="production_All"/>
+
+	<playerRepair player="Germany" frontier="repair"/>
+	<playerRepair player="Austria-Hungary" frontier="repair"/>
+	<playerRepair player="OttomanEmpire" frontier="repair"/>
+
+	<playerRepair player="France" frontier="repair"/>
+	<playerRepair player="Russia" frontier="repair"/>
+	<playerRepair player="Italy" frontier="repair"/>
+	<playerRepair player="UnitedKingdom" frontier="repair"/>
+
     </production>
 
 <technology>
@@ -6195,6 +6211,16 @@
 		<option name="production" value="2"/>
 	</attachment>	
 
+<!--Canals-->
+<attachment name="canalAttachmentKiel" attachTo="Sea Zone 51" javaClass="games.strategy.triplea.attachments.CanalAttachment" type="territory">
+	<option name="canalName" value="Kiel Canal"/>
+	<option name="landTerritories" value="Denmark 06"/>
+</attachment>
+<attachment name="canalAttachmentKiel" attachTo="Sea Zone 27" javaClass="games.strategy.triplea.attachments.CanalAttachment" type="territory">
+	<option name="canalName" value="Kiel Canal"/>
+	<option name="landTerritories" value="Denmark 06"/>
+</attachment>
+
 
         <!-- Unit Attachments -->
 <attachment name="unitAttachment" attachTo="Airship" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
@@ -6247,8 +6273,8 @@
 
 <attachment name="unitAttachment" attachTo="Cruiser" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
 	<option name="movement" value="2"/>
-	<option name="attack" value="3"/>
-	<option name="defense" value="4"/>
+	<option name="attack" value="4"/>
+	<option name="defense" value="5"/>
 	<option name="isSea" value="true"/>
 </attachment>
 
@@ -6350,6 +6376,11 @@
 	<option name="attack" value="2"/>
 	<option name="defense" value="3"/>
 	<option name="isAir" value="true"/>
+	<option name="canAirBattle" value="true"/>
+	<option name="canEscort" value="true"/>
+	<option name="canIntercept" value="true"/>
+	<option name="airAttack" value="5"/>
+	<option name="airDefense" value="6"/>
 </attachment>
 
 <attachment name="unitAttachment" attachTo="Sea-Mine" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
@@ -6433,24 +6464,13 @@
 
 <!--Support Attachments-->
 
-<attachment name="supportAttachmentLightArtillery" attachTo="Light-Artillery" javaClass="games.strategy.triplea.attachments.UnitSupportAttachment" type="unitType">
-	<option name="unitType" value="Infantry"/>
-	<option name="faction" value="allied"/>
-	<option name="side" value="offence"/>
-	<option name="dice" value="strength"/>
-	<option name="bonus" value="1"/>
-	<option name="number" value="1"/>
-	<option name="bonusType" value="ArtillerySupport"/>
-	<option name="players" value="Germany:France:Italy:Austria-Hungary:Russia:OttomanEmpire:UnitedKingdom"/>
-    </attachment>
-
 <attachment name="supportAttachmentOffesniveReconaissance" attachTo="Recon-Plane" javaClass="games.strategy.triplea.attachments.UnitSupportAttachment" type="unitType">
 	<option name="unitType" value="Barrage:Light-Artillery"/>
 	<option name="faction" value="allied"/>
 	<option name="side" value="offence"/>
 	<option name="dice" value="strength"/>
-	<option name="bonus" value="1"/>
-	<option name="number" value="3"/>
+	<option name="bonus" value="2"/>
+	<option name="number" value="1000"/>
 	<option name="bonusType" value="Reconaissance"/>
 	<option name="players" value="Germany:France:Italy:Austria-Hungary:Russia:OttomanEmpire:UnitedKingdom"/>
     </attachment>
@@ -6460,54 +6480,20 @@
 	<option name="faction" value="allied"/>
 	<option name="side" value="defence"/>
 	<option name="dice" value="strength"/>
-	<option name="bonus" value="1"/>
-	<option name="number" value="3"/>
+	<option name="bonus" value="2"/>
+	<option name="number" value="1000"/>
 	<option name="bonusType" value="Reconaissance"/>
 	<option name="players" value="Germany:France:Italy:Austria-Hungary:Russia:OttomanEmpire:UnitedKingdom"/>
     </attachment>
 
-<attachment name="supportAttachmentGasAttack" attachTo="Gas" javaClass="games.strategy.triplea.attachments.UnitSupportAttachment" type="unitType">
-	<option name="unitType" value="Infantry"/>
-	<option name="faction" value="enemy"/>
-	<option name="side" value="offence"/>
-	<option name="dice" value="strength"/>
-	<option name="bonus" value="-2"/>
-	<option name="number" value="1000"/>
-	<option name="bonusType" value="GasAttack"/>
-	<option name="players" value="Germany:France:Italy:Austria-Hungary:Russia:OttomanEmpire:UnitedKingdom"/>
-    </attachment>
-
-<attachment name="supportAttachmentTrenches" attachTo="Entrenchment" javaClass="games.strategy.triplea.attachments.UnitSupportAttachment" type="unitType">
-	<option name="unitType" value="Infantry"/>
-	<option name="faction" value="allied"/>
-	<option name="side" value="defence"/>
-	<option name="dice" value="strength"/>
-	<option name="bonus" value="1"/>
-	<option name="number" value="5"/>
-	<option name="bonusType" value="TrenchDefense"/>
-	<option name="players" value="Germany:France:Italy:Austria-Hungary:Russia:OttomanEmpire:UnitedKingdom"/>
-    </attachment>
-
-<attachment name="supportAttachmentTrenchCavalry" attachTo="Entrenchment" javaClass="games.strategy.triplea.attachments.UnitSupportAttachment" type="unitType">
-	<option name="unitType" value="Cavalry"/>
-	<option name="faction" value="enemy"/>
-	<option name="side" value="defence"/>
-	<option name="dice" value="strength"/>
-	<option name="bonus" value="-3"/>
-	<option name="number" value="100"/>
-	<option name="bonusType" value="MachineGuns"/>
-	<option name="players" value="Germany:France:Italy:Austria-Hungary:Russia:OttomanEmpire:UnitedKingdom"/>
-    </attachment>
-
-<!--Player Attachments-->
-<attachment name="playerAttachment" attachTo="NeutralNations" javaClass="games.strategy.triplea.attachments.PlayerAttachment" type="player">
-	<option name="captureUnitOnEnteringBy" value="Germany"/>
+<!--National Objectives-->
+<attachment name="objectiveAttachmentRussianGovernmentCorruption" attachTo="Russia" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+	<option name="objectiveValue" value="-50"/>
 </attachment>
 
-<!--National Objectives-->
-    <attachment name="objectiveAttachmentRussianGovernmentCorruption" attachTo="Russia" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
-      <option name="objectiveValue" value="-50"/>
-    </attachment>
+<attachment name="objectiveAttachmentSuezCanal" attachTo="UnitedKingdom" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+	<option name="objectiveValue" value="30"/>
+</attachment>
 
 <!--Conditions-->
 <!--Conditions for Basic Game Features-->
@@ -6549,6 +6535,13 @@
 <!--Tech Conditions-->
 
 <!--Triggers-->
+<!--Railroad Triggers-->
+
+<attachment name="triggerAttachmentReinforceFrance" attachTo="NeutralNations" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+	<option name="conditions" value="conditionAttachmentTurn1"/>
+	<option name="when" value="after:ItalyEndTurn"/>
+</attachment>
+
 <!--Minor Nation Triggers-->
 <attachment name="triggerAttachmentItalyDeclaresWar" attachTo="Italy" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
 	<option name="conditions" value="conditionAttachmentTurn1"/>
@@ -6627,6 +6620,7 @@
 	<option name="changeOwnership" value="Bulgaria 08:NeutralNations:Austria-Hungary:true"/>
 	<option name="changeOwnership" value="Bulgaria 09:NeutralNations:Austria-Hungary:true"/>
 	<option name="changeOwnership" value="Bulgaria 10:NeutralNations:Austria-Hungary:true"/>
+	<option name="changeOwnership" value="Bulgaria 11:NeutralNations:Austria-Hungary:true"/>
 	<option name="changeOwnership" value="Bulgaria 12:NeutralNations:Austria-Hungary:true"/>
 	<option name="changeOwnership" value="Bulgaria 13:NeutralNations:Austria-Hungary:true"/>
 	<option name="changeOwnership" value="Greece 09:NeutralNations:Austria-Hungary:true"/>
@@ -6848,7 +6842,7 @@
             <territoryOwner territory="Bulgaria 08" owner="NeutralNations"/>
             <territoryOwner territory="Bulgaria 09" owner="NeutralNations"/>
             <territoryOwner territory="Bulgaria 10" owner="NeutralNations"/>
-            <territoryOwner territory="Bulgaria 11" owner="Russia"/>
+            <territoryOwner territory="Bulgaria 11" owner="NeutralNations"/>
             <territoryOwner territory="Bulgaria 12" owner="NeutralNations"/>
             <territoryOwner territory="Bulgaria 13" owner="NeutralNations"/>
             <territoryOwner territory="Caucasus 01" owner="Russia"/>
@@ -7104,6 +7098,14 @@
             <territoryOwner territory="Moldova 04" owner="Russia"/>
             <territoryOwner territory="Moldova 05" owner="Russia"/>
             <territoryOwner territory="Moldova 06" owner="Russia"/>
+            <territoryOwner territory="Morocco 01" owner="NeutralNations"/>
+            <territoryOwner territory="Morocco 02" owner="NeutralNations"/>
+            <territoryOwner territory="Morocco 03" owner="NeutralNations"/>
+            <territoryOwner territory="Morocco 04" owner="NeutralNations"/>
+            <territoryOwner territory="Morocco 05" owner="NeutralNations"/>
+            <territoryOwner territory="Morocco 06" owner="NeutralNations"/>
+            <territoryOwner territory="Morocco 07" owner="NeutralNations"/>
+            <territoryOwner territory="Morocco 08" owner="NeutralNations"/>
             <territoryOwner territory="Netherlands 01" owner="NeutralNations"/>
             <territoryOwner territory="Netherlands 02" owner="NeutralNations"/>
             <territoryOwner territory="Netherlands 03" owner="NeutralNations"/>
@@ -7136,13 +7138,13 @@
             <territoryOwner territory="Poland 12" owner="Russia"/>
             <territoryOwner territory="Poland 13" owner="Germany"/>
             <territoryOwner territory="Poland 14" owner="Germany"/>
-            <territoryOwner territory="Poland 15" owner="Russia"/>
+            <territoryOwner territory="Poland 15" owner="Germany"/>
             <territoryOwner territory="Poland 16" owner="Russia"/>
             <territoryOwner territory="Poland 17" owner="Russia"/>
             <territoryOwner territory="Poland 18" owner="Russia"/>
             <territoryOwner territory="Poland 19" owner="Russia"/>
             <territoryOwner territory="Poland 20" owner="Russia"/>
-            <territoryOwner territory="Poland 21" owner="Russia"/>
+            <territoryOwner territory="Poland 21" owner="Germany"/>
             <territoryOwner territory="Poland 22" owner="Germany"/>
             <territoryOwner territory="Poland 23" owner="Austria-Hungary"/>
             <territoryOwner territory="Poland 24" owner="Austria-Hungary"/>
@@ -7269,7 +7271,7 @@
             <territoryOwner territory="Serbia 03" owner="Russia"/>
             <territoryOwner territory="Serbia 04" owner="Russia"/>
             <territoryOwner territory="Serbia 05" owner="Russia"/>
-            <territoryOwner territory="Serbia 06" owner="Austria-Hungary"/>
+            <territoryOwner territory="Serbia 06" owner="Russia"/>
             <territoryOwner territory="Serbia 07" owner="Russia"/>
             <territoryOwner territory="Sevastpol" owner="Russia"/>
             <territoryOwner territory="Sicily 01" owner="NeutralNations"/>
@@ -7484,7 +7486,7 @@
             <unitPlacement unitType="NeutralInfantry" territory="Rhodes" quantity="1" owner="NeutralNations"/>
             <unitPlacement unitType="Infantry" territory="Cyprus" quantity="1" owner="UnitedKingdom"/>
             <unitPlacement unitType="Transport" territory="Sea Zone 113" quantity="1" owner="NeutralNations"/>
-            <unitPlacement unitType="Battlecruiser" territory="Sea Zone 113" quantity="1" owner="NeutralNations"/>
+            <unitPlacement unitType="Cruiser" territory="Sea Zone 113" quantity="1" owner="NeutralNations"/>
             <unitPlacement unitType="Submarine" territory="Sea Zone 113" quantity="1" owner="NeutralNations"/>
             <unitPlacement unitType="Dreadnought" territory="Sea Zone 114" quantity="1" owner="France"/>
             <unitPlacement unitType="Dreadnought" territory="Sea Zone 147" quantity="1" owner="NeutralNations"/>
@@ -7497,9 +7499,9 @@
             <unitPlacement unitType="Dreadnought" territory="Sea Zone 152" quantity="1" owner="Austria-Hungary"/>
             <unitPlacement unitType="Cruiser" territory="Sea Zone 152" quantity="1" owner="Austria-Hungary"/>
             <unitPlacement unitType="Transport" territory="Sea Zone 172" quantity="1" owner="UnitedKingdom"/>
-            <unitPlacement unitType="Battlecruiser" territory="Sea Zone 172" quantity="1" owner="UnitedKingdom"/>
             <unitPlacement unitType="Cruiser" territory="Sea Zone 172" quantity="1" owner="UnitedKingdom"/>
-            <unitPlacement unitType="Battlecruiser" territory="Sea Zone 190" quantity="1" owner="OttomanEmpire"/>
+            <unitPlacement unitType="Cruiser" territory="Sea Zone 172" quantity="1" owner="UnitedKingdom"/>
+            <unitPlacement unitType="Cruiser" territory="Sea Zone 190" quantity="1" owner="OttomanEmpire"/>
             <unitPlacement unitType="Cruiser" territory="Sea Zone 191" quantity="2" owner="OttomanEmpire"/>
             <unitPlacement unitType="Transport" territory="Sea Zone 191" quantity="1" owner="OttomanEmpire"/>
             <unitPlacement unitType="Dreadnought" territory="Sea Zone 200" quantity="1" owner="Russia"/>
@@ -7509,20 +7511,20 @@
             <unitPlacement unitType="Transport" territory="Sea Zone 28" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Dreadnought" territory="Sea Zone 32" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Cruiser" territory="Sea Zone 32" quantity="1" owner="Germany"/>
-            <unitPlacement unitType="Battlecruiser" territory="Sea Zone 36" quantity="1" owner="NeutralNations"/>
+            <unitPlacement unitType="Cruiser" territory="Sea Zone 36" quantity="1" owner="NeutralNations"/>
             <unitPlacement unitType="Cruiser" territory="Sea Zone 36" quantity="1" owner="NeutralNations"/>
             <unitPlacement unitType="Submarine" territory="Sea Zone 37" quantity="1" owner="Russia"/>
             <unitPlacement unitType="Transport" territory="Sea Zone 39" quantity="1" owner="Russia"/>
-            <unitPlacement unitType="Battlecruiser" territory="Sea Zone 39" quantity="1" owner="Russia"/>
+            <unitPlacement unitType="Cruiser" territory="Sea Zone 39" quantity="1" owner="Russia"/>
             <unitPlacement unitType="Dreadnought" territory="Sea Zone 50" quantity="1" owner="Germany"/>
-            <unitPlacement unitType="Battlecruiser" territory="Sea Zone 50" quantity="1" owner="Germany"/>
+            <unitPlacement unitType="Cruiser" territory="Sea Zone 50" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Submarine" territory="Sea Zone 50" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Dreadnought" territory="Sea Zone 51" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Cruiser" territory="Sea Zone 51" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Submarine" territory="Sea Zone 51" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Dreadnought" territory="Sea Zone 56" quantity="1" owner="UnitedKingdom"/>
             <unitPlacement unitType="Cruiser" territory="Sea Zone 56" quantity="1" owner="UnitedKingdom"/>
-            <unitPlacement unitType="Battlecruiser" territory="Sea Zone 56" quantity="1" owner="UnitedKingdom"/>
+            <unitPlacement unitType="Cruiser" territory="Sea Zone 56" quantity="1" owner="UnitedKingdom"/>
             <unitPlacement unitType="Dreadnought" territory="Sea Zone 58" quantity="2" owner="UnitedKingdom"/>
             <unitPlacement unitType="Transport" territory="Sea Zone 58" quantity="1" owner="UnitedKingdom"/>
             <unitPlacement unitType="Cruiser" territory="Sea Zone 62" quantity="1" owner="UnitedKingdom"/>
@@ -7588,10 +7590,11 @@
             <unitPlacement unitType="Infantry" territory="Bohemia 09" quantity="1" owner="Austria-Hungary"/>
             <unitPlacement unitType="Railroad" territory="Bosnia 01" quantity="1" owner="Austria-Hungary"/>
             <unitPlacement unitType="Infantry" territory="Bosnia 01" quantity="1" owner="Austria-Hungary"/>
+            <unitPlacement unitType="Light-Artillery" territory="Bosnia 01" quantity="1" owner="Austria-Hungary"/>
             <unitPlacement unitType="Railroad" territory="Bosnia 02" quantity="1" owner="Austria-Hungary"/>
             <unitPlacement unitType="Infantry" territory="Bosnia 02" quantity="2" owner="Austria-Hungary"/>
             <unitPlacement unitType="Light-Artillery" territory="Bosnia 02" quantity="1" owner="Austria-Hungary"/>
-            <unitPlacement unitType="Infantry" territory="Bosnia 03" quantity="1" owner="Austria-Hungary"/>
+            <unitPlacement unitType="Infantry" territory="Bosnia 03" quantity="2" owner="Austria-Hungary"/>
             <unitPlacement unitType="Light-Artillery" territory="Bosnia 04" quantity="1" owner="Austria-Hungary"/>
             <unitPlacement unitType="Infantry" territory="Bosnia 04" quantity="2" owner="Austria-Hungary"/>
             <unitPlacement unitType="Cavalry" territory="Bosnia 04" quantity="1" owner="Austria-Hungary"/>
@@ -7615,7 +7618,7 @@
             <unitPlacement unitType="NeutralLight-Artillery" territory="Bulgaria 09" quantity="1" owner="NeutralNations"/>
             <unitPlacement unitType="NeutralRecon-Plane" territory="Bulgaria 09" quantity="1" owner="NeutralNations"/>
             <unitPlacement unitType="NeutralInfantry" territory="Bulgaria 10" quantity="1" owner="NeutralNations"/>
-            <unitPlacement unitType="Infantry" territory="Bulgaria 11" quantity="1" owner="Russia"/>
+            <unitPlacement unitType="Infantry" territory="Bulgaria 11" quantity="2" owner="NeutralNations"/>
             <unitPlacement unitType="NeutralInfantry" territory="Bulgaria 12" quantity="1" owner="NeutralNations"/>
             <unitPlacement unitType="Railroad" territory="Bulgaria 13" quantity="1" owner="NeutralNations"/>
             <unitPlacement unitType="NeutralInfantry" territory="Bulgaria 13" quantity="1" owner="NeutralNations"/>
@@ -7631,9 +7634,10 @@
             <unitPlacement unitType="Railroad" territory="Croatia 05" quantity="1" owner="Austria-Hungary"/>
             <unitPlacement unitType="Infantry" territory="Croatia 05" quantity="2" owner="Austria-Hungary"/>
             <unitPlacement unitType="Light-Artillery" territory="Croatia 05" quantity="1" owner="Austria-Hungary"/>
-            <unitPlacement unitType="Infantry" territory="Croatia 06" quantity="1" owner="Austria-Hungary"/>
+            <unitPlacement unitType="Infantry" territory="Croatia 06" quantity="2" owner="Austria-Hungary"/>
             <unitPlacement unitType="Infantry" territory="Croatia 07" quantity="1" owner="Austria-Hungary"/>
-            <unitPlacement unitType="Infantry" territory="Croatia 08" quantity="1" owner="Austria-Hungary"/>
+            <unitPlacement unitType="Infantry" territory="Croatia 08" quantity="2" owner="Austria-Hungary"/>
+            <unitPlacement unitType="Light-Artillery" territory="Croatia 08" quantity="1" owner="Austria-Hungary"/>
             <unitPlacement unitType="Factory" territory="Denmark 01" quantity="1" owner="NeutralNations"/>
             <unitPlacement unitType="NeutralInfantry" territory="Denmark 01" quantity="4" owner="NeutralNations"/>
             <unitPlacement unitType="NeutralLight-Artillery" territory="Denmark 01" quantity="1" owner="NeutralNations"/>
@@ -7649,7 +7653,6 @@
             <unitPlacement unitType="Infantry" territory="Egypt 07" quantity="3" owner="UnitedKingdom"/>
             <unitPlacement unitType="Light-Artillery" territory="Egypt 07" quantity="1" owner="UnitedKingdom"/>
             <unitPlacement unitType="Factory" territory="Egypt 09" quantity="1" owner="UnitedKingdom"/>
-            <unitPlacement unitType="Infantry" territory="Egypt 09" quantity="1" owner="UnitedKingdom"/>
             <unitPlacement unitType="Infantry" territory="Egypt 10" quantity="1" owner="UnitedKingdom"/>
             <unitPlacement unitType="Cavalry" territory="Egypt 10" quantity="1" owner="UnitedKingdom"/>
             <unitPlacement unitType="Railroad" territory="England 01" quantity="1" owner="UnitedKingdom"/>
@@ -7696,7 +7699,6 @@
             <unitPlacement unitType="Infantry" territory="Paris" quantity="3" owner="France"/>
             <unitPlacement unitType="Cavalry" territory="Paris" quantity="1" owner="France"/>
             <unitPlacement unitType="Train" territory="Paris" quantity="1" owner="France"/>
-            <unitPlacement unitType="Heavy-Artillery" territory="Paris" quantity="1" owner="France"/>
             <unitPlacement unitType="Infantry" territory="France 16" quantity="1" owner="France"/>
             <unitPlacement unitType="Railroad" territory="France 17" quantity="1" owner="France"/>
             <unitPlacement unitType="Infantry" territory="France 17" quantity="1" owner="France"/>
@@ -7707,15 +7709,12 @@
             <unitPlacement unitType="Infantry" territory="France 19" quantity="2" owner="France"/>
             <unitPlacement unitType="Cavalry" territory="France 19" quantity="1" owner="France"/>
             <unitPlacement unitType="Railroad" territory="France 20" quantity="1" owner="Germany"/>
-            <unitPlacement unitType="Infantry" territory="France 20" quantity="2" owner="Germany"/>
-            <unitPlacement unitType="Entrenchment" territory="France 20" quantity="1" owner="Germany"/>
+            <unitPlacement unitType="Infantry" territory="France 20" quantity="6" owner="Germany"/>
             <unitPlacement unitType="Cavalry" territory="France 20" quantity="1" owner="Germany"/>
-            <unitPlacement unitType="Heavy-Artillery" territory="France 20" quantity="1" owner="Germany"/>
-            <unitPlacement unitType="Barrage" territory="France 20" quantity="1" owner="Germany"/>
+            <unitPlacement unitType="Light-Artillery" territory="France 20" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Cavalry" territory="France 21" quantity="1" owner="France"/>
             <unitPlacement unitType="Light-Artillery" territory="France 21" quantity="1" owner="France"/>
             <unitPlacement unitType="Infantry" territory="France 21" quantity="3" owner="France"/>
-            <unitPlacement unitType="Entrenchment" territory="France 21" quantity="1" owner="France"/>
             <unitPlacement unitType="Railroad" territory="France 22" quantity="1" owner="France"/>
             <unitPlacement unitType="Infantry" territory="France 22" quantity="1" owner="France"/>
             <unitPlacement unitType="Cavalry" territory="France 22" quantity="1" owner="France"/>
@@ -7755,14 +7754,13 @@
             <unitPlacement unitType="Train" territory="Germany 09" quantity="2" owner="Germany"/>
             <unitPlacement unitType="Airship" territory="Germany 09" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Recon-Plane" territory="Germany 09" quantity="1" owner="Germany"/>
-            <unitPlacement unitType="Light-Artillery" territory="Germany 09" quantity="2" owner="Germany"/>
-            <unitPlacement unitType="Heavy-Artillery" territory="Germany 09" quantity="1" owner="Germany"/>
+            <unitPlacement unitType="Light-Artillery" territory="Germany 09" quantity="3" owner="Germany"/>
             <unitPlacement unitType="Railroad" territory="Germany 10" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Railroad" territory="Germany 11" quantity="1" owner="Germany"/>
-            <unitPlacement unitType="Railroad" territory="Germany 12" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Infantry" territory="Germany 13" quantity="2" owner="Germany"/>
             <unitPlacement unitType="Railroad" territory="Germany 14" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Infantry" territory="Germany 14" quantity="1" owner="Germany"/>
+            <unitPlacement unitType="Railroad" territory="Germany 15" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Railroad" territory="Germany 17" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Infantry" territory="Germany 17" quantity="3" owner="Germany"/>
             <unitPlacement unitType="Train" territory="Germany 17" quantity="1" owner="Germany"/>
@@ -7771,7 +7769,6 @@
             <unitPlacement unitType="Railroad" territory="Germany 18" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Railroad" territory="Germany 23" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Factory" territory="Germany 23" quantity="1" owner="Germany"/>
-            <unitPlacement unitType="Heavy-Artillery" territory="Germany 23" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Recon-Plane" territory="Germany 23" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Infantry" territory="Germany 23" quantity="3" owner="Germany"/>
             <unitPlacement unitType="Infantry" territory="Germany 24" quantity="2" owner="Germany"/>
@@ -7804,7 +7801,7 @@
             <unitPlacement unitType="NeutralInfantry" territory="Greece 07" quantity="2" owner="NeutralNations"/>
             <unitPlacement unitType="NeutralCavalry" territory="Greece 07" quantity="1" owner="NeutralNations"/>
             <unitPlacement unitType="Railroad" territory="Greece 08" quantity="1" owner="Russia"/>
-            <unitPlacement unitType="Infantry" territory="Greece 08" quantity="2" owner="Russia"/>
+            <unitPlacement unitType="Infantry" territory="Greece 08" quantity="1" owner="Russia"/>
             <unitPlacement unitType="NeutralInfantry" territory="Greece 09" quantity="1" owner="NeutralNations"/>
             <unitPlacement unitType="Railroad" territory="Hungary 01" quantity="1" owner="Austria-Hungary"/>
             <unitPlacement unitType="Recon-Plane" territory="Hungary 01" quantity="1" owner="Austria-Hungary"/>
@@ -7933,8 +7930,8 @@
             <unitPlacement unitType="Railroad" territory="Poland 14" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Infantry" territory="Poland 14" quantity="2" owner="Germany"/>
             <unitPlacement unitType="Cavalry" territory="Poland 14" quantity="1" owner="Germany"/>
-            <unitPlacement unitType="Infantry" territory="Poland 15" quantity="2" owner="Russia"/>
-            <unitPlacement unitType="Light-Artillery" territory="Poland 15" quantity="1" owner="Russia"/>
+            <unitPlacement unitType="Infantry" territory="Poland 15" quantity="2" owner="Germany"/>
+            <unitPlacement unitType="Light-Artillery" territory="Poland 15" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Infantry" territory="Poland 16" quantity="1" owner="Russia"/>
             <unitPlacement unitType="Cavalry" territory="Poland 16" quantity="1" owner="Russia"/>
             <unitPlacement unitType="Light-Artillery" territory="Poland 17" quantity="1" owner="Russia"/>
@@ -7944,8 +7941,8 @@
             <unitPlacement unitType="Cavalry" territory="Poland 18" quantity="1" owner="Russia"/>
             <unitPlacement unitType="Infantry" territory="Poland 19" quantity="1" owner="Russia"/>
             <unitPlacement unitType="Infantry" territory="Poland 20" quantity="1" owner="Russia"/>
-            <unitPlacement unitType="Infantry" territory="Poland 21" quantity="1" owner="Russia"/>
-            <unitPlacement unitType="Cavalry" territory="Poland 21" quantity="1" owner="Russia"/>
+            <unitPlacement unitType="Infantry" territory="Poland 21" quantity="1" owner="Germany"/>
+            <unitPlacement unitType="Cavalry" territory="Poland 21" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Railroad" territory="Poland 22" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Factory" territory="Poland 22" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Infantry" territory="Poland 22" quantity="3" owner="Germany"/>
@@ -7976,7 +7973,6 @@
             <unitPlacement unitType="Infantry" territory="Prussia 02" quantity="2" owner="Germany"/>
             <unitPlacement unitType="Recon-Plane" territory="Prussia 02" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Cavalry" territory="Prussia 02" quantity="1" owner="Germany"/>
-            <unitPlacement unitType="Heavy-Artillery" territory="Prussia 02" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Railroad" territory="Prussia 03" quantity="1" owner="Germany"/>
             <unitPlacement unitType="Infantry" territory="Prussia 03" quantity="2" owner="Germany"/>
             <unitPlacement unitType="Railroad" territory="Prussia 04" quantity="1" owner="Germany"/>
@@ -8031,7 +8027,6 @@
             <unitPlacement unitType="Factory" territory="Russia 46" quantity="1" owner="Russia"/>
             <unitPlacement unitType="Railroad" territory="Russia 46" quantity="1" owner="Russia"/>
             <unitPlacement unitType="Infantry" territory="Russia 46" quantity="3" owner="Russia"/>
-            <unitPlacement unitType="Heavy-Artillery" territory="Russia 46" quantity="1" owner="Russia"/>
             <unitPlacement unitType="Train" territory="Russia 46" quantity="1" owner="Russia"/>
             <unitPlacement unitType="Railroad" territory="Russia 51" quantity="1" owner="Russia"/>
             <unitPlacement unitType="Railroad" territory="Russia 52" quantity="1" owner="Russia"/>
@@ -8052,18 +8047,19 @@
             <unitPlacement unitType="Infantry" territory="Serbia 01" quantity="1" owner="Russia"/>
             <unitPlacement unitType="Cavalry" territory="Serbia 01" quantity="1" owner="Russia"/>
             <unitPlacement unitType="Railroad" territory="Serbia 02" quantity="1" owner="Russia"/>
-            <unitPlacement unitType="Infantry" territory="Serbia 02" quantity="2" owner="Russia"/>
-            <unitPlacement unitType="Infantry" territory="Serbia 03" quantity="2" owner="Russia"/>
+            <unitPlacement unitType="Infantry" territory="Serbia 02" quantity="1" owner="Russia"/>
+            <unitPlacement unitType="Infantry" territory="Serbia 03" quantity="1" owner="Russia"/>
             <unitPlacement unitType="Railroad" territory="Serbia 04" quantity="1" owner="Russia"/>
             <unitPlacement unitType="Factory" territory="Serbia 04" quantity="1" owner="Russia"/>
             <unitPlacement unitType="Infantry" territory="Serbia 04" quantity="2" owner="Russia"/>
             <unitPlacement unitType="Light-Artillery" territory="Serbia 04" quantity="1" owner="Russia"/>
-            <unitPlacement unitType="Infantry" territory="Serbia 05" quantity="3" owner="Russia"/>
+            <unitPlacement unitType="Railroad" territory="Serbia 05" quantity="1" owner="Russia"/>
+            <unitPlacement unitType="Infantry" territory="Serbia 05" quantity="2" owner="Russia"/>
             <unitPlacement unitType="Light-Artillery" territory="Serbia 05" quantity="1" owner="Russia"/>
-            <unitPlacement unitType="Railroad" territory="Serbia 06" quantity="1" owner="Austria-Hungary"/>
-            <unitPlacement unitType="Infantry" territory="Serbia 06" quantity="2" owner="Austria-Hungary"/>
-            <unitPlacement unitType="Light-Artillery" territory="Serbia 06" quantity="1" owner="Austria-Hungary"/>
-            <unitPlacement unitType="Cavalry" territory="Serbia 06" quantity="1" owner="Austria-Hungary"/>
+            <unitPlacement unitType="Railroad" territory="Serbia 06" quantity="1" owner="Russia"/>
+            <unitPlacement unitType="Infantry" territory="Serbia 06" quantity="2" owner="Russia"/>
+            <unitPlacement unitType="Light-Artillery" territory="Serbia 06" quantity="1" owner="Russia"/>
+            <unitPlacement unitType="Cavalry" territory="Serbia 06" quantity="1" owner="Russia"/>
             <unitPlacement unitType="Infantry" territory="Serbia 07" quantity="1" owner="Russia"/>
             <unitPlacement unitType="Cavalry" territory="Serbia 07" quantity="1" owner="Russia"/>
             <unitPlacement unitType="Factory" territory="Sevastpol" quantity="1" owner="Russia"/>
@@ -8142,7 +8138,6 @@
             <unitPlacement unitType="Factory" territory="Turkey 03" quantity="1" owner="OttomanEmpire"/>
             <unitPlacement unitType="Train" territory="Turkey 03" quantity="1" owner="OttomanEmpire"/>
             <unitPlacement unitType="Infantry" territory="Turkey 03" quantity="4" owner="OttomanEmpire"/>
-            <unitPlacement unitType="Heavy-Artillery" territory="Turkey 03" quantity="1" owner="OttomanEmpire"/>
             <unitPlacement unitType="Railroad" territory="Turkey 04" quantity="1" owner="OttomanEmpire"/>
             <unitPlacement unitType="Train" territory="Turkey 04" quantity="1" owner="OttomanEmpire"/>
             <unitPlacement unitType="Infantry" territory="Turkey 04" quantity="3" owner="OttomanEmpire"/>
@@ -8153,8 +8148,6 @@
             <unitPlacement unitType="Light-Artillery" territory="Turkey 07" quantity="1" owner="OttomanEmpire"/>
             <unitPlacement unitType="Cavalry" territory="Turkey 07" quantity="1" owner="OttomanEmpire"/>
             <unitPlacement unitType="Railroad" territory="Turkey 18" quantity="1" owner="OttomanEmpire"/>
-            <unitPlacement unitType="Infantry" territory="Turkey 18" quantity="3" owner="OttomanEmpire"/>
-            <unitPlacement unitType="Train" territory="Turkey 18" quantity="1" owner="OttomanEmpire"/>
             <unitPlacement unitType="Railroad" territory="Turkey 21" quantity="1" owner="OttomanEmpire"/>
             <unitPlacement unitType="Factory" territory="Turkey 21" quantity="1" owner="OttomanEmpire"/>
             <unitPlacement unitType="Infantry" territory="Turkey 21" quantity="2" owner="OttomanEmpire"/>
@@ -8170,8 +8163,6 @@
             <unitPlacement unitType="Infantry" territory="Turkey 36" quantity="1" owner="OttomanEmpire"/>
             <unitPlacement unitType="Cavalry" territory="Turkey 36" quantity="1" owner="OttomanEmpire"/>
             <unitPlacement unitType="Railroad" territory="Turkey 38" quantity="1" owner="OttomanEmpire"/>
-            <unitPlacement unitType="Infantry" territory="Turkey 40" quantity="1" owner="OttomanEmpire"/>
-            <unitPlacement unitType="Cavalry" territory="Turkey 40" quantity="1" owner="OttomanEmpire"/>
             <unitPlacement unitType="Infantry" territory="Turkey 43" quantity="1" owner="OttomanEmpire"/>
             <unitPlacement unitType="Infantry" territory="Turkey 44" quantity="2" owner="OttomanEmpire"/>
             <unitPlacement unitType="Light-Artillery" territory="Turkey 44" quantity="1" owner="OttomanEmpire"/>
@@ -8647,7 +8638,7 @@
     <property name="Raids May Be Preceeded By Air Battles" value="true" editable="false">
       <boolean/>
     </property>
-    <property name="Damage From Bombing Done To Units Instead Of Territories" value="false" editable="false">
+    <property name="Damage From Bombing Done To Units Instead Of Territories" value="true" editable="false">
       <boolean/>
     </property>
     <property name="Use Bombing Max Dice Sides And Bonus" value="true" editable="false">
@@ -8676,17 +8667,19 @@ Credits:
 <br/>Unit art by Frostion.
 <br/>Unit and map art by Hepps.
 <br/>
-The goal of this map is to create a balanced games, using the history of the first world war as inspiration.
+The goal of this map is to create a balanced game, using the history of the first world war as inspiration.
 
 <table border="2"bgcolor="ABABAB">
 	<tr>
 	<th style="font-size:100%;000000"bgcolor="CEF6F5"colspan="2">
 
 <br/>Special Features:
-<br/>Several "new" weapons that showcase lesser known features, such as suicide units and enemy debuffs.
+<br/>Several "new" weapons that showcase lesser known features.
 <br/>Minor nations will join the war as the game goes on.
 <br/>The Kiel Canal, in German controlled Denmark connects sea zones 27 and 51.
 <br/>Railroads and trains play an important role in this conflict!
+<br/>Air battles occur before land combat. Aircraft boost land unit strength
+<br/>Airships can bomb factories. Recon Planes can escort or intercept those bombing raids.
 
 </th>
 
@@ -8710,9 +8703,19 @@ The goal of this map is to create a balanced games, using the history of the fir
 	<td></td>
 	<td>France</td>
 	</tr>
+
+	<tr bgcolor="BDBDBD">
+	<td></td>
+	<td>Italy (skips first turn)</td>
+	</tr>
+
 	<tr bgcolor="ABABAB">
 	<td></td>
 	<td>Russia</td>
+	</tr>
+	<tr bgcolor="BDBDBD">
+	<td></td>
+	<td>United Kingdom</td>
 	</tr>
 
 	<tr bgcolor="BDBDBD">
@@ -8724,14 +8727,6 @@ The goal of this map is to create a balanced games, using the history of the fir
 	<td></td>
 	</tr>
 
-	<tr bgcolor="BDBDBD">
-	<td></td>
-	<td>United Kingdom</td>
-	</tr>
-	<tr bgcolor="BDBDBD">
-	<td></td>
-	<td>Italy (skips first turn)</td>
-	</tr>
 
 </table>
 
@@ -8772,26 +8767,6 @@ The goal of this map is to create a balanced games, using the history of the fir
 	<td></td>
 	</tr>
 
-	<tr bgcolor="BDBDBD">
-	<td>Heavy-Artillery</td>
-	<td>0</td>
-	<td>6</td>
-	<td>1</td>
-	<td>8</td>
-	<td>4</td>
-	<td>Cannot Attack. Creates a suicide unit each turn to attack nearby territories</td>
-	</tr>
-
-	<tr bgcolor="ABABAB">
-	<td>Barrage</td>
-	<td>6</td>
-	<td>0</td>
-	<td>1</td>
-	<td></td>
-	<td></td>
-	<td>Created by heavy artillery to attack nearby territories. Disappears if unused in a turn.</td>
-	</tr>
-
 	<tr bgcolor="ABABAB">
 	<td>Cavalry</td>
 	<td>4</td>
@@ -8799,17 +8774,17 @@ The goal of this map is to create a balanced games, using the history of the fir
 	<td>2</td>
 	<td>7</td>
 	<td>3</td>
-	<td>Can blitz. Bad against entrenchments.</td>
+	<td>Can blitz</td>
 	</tr>
 
 	<tr bgcolor="BDBDBD">
-	<td>Entrenchment</td>
-	<td></td>
-	<td></td>
-	<td></td>
+	<td>Recon-Plane</td>
+	<td>2</td>
+	<td>3</td>
+	<td>3</td>
 	<td>10</td>
 	<td></td>
-	<td>Gives 5 infantry +1 defense. Gives all enemy cavalry -3 attack. Can be placed without a factory. Destroyed if captured.</td>
+	<td>Gives all friendly Light-Artillery +1 attack</td>
 	</tr>
 
 	<tr bgcolor="ABABAB">
@@ -8823,23 +8798,13 @@ The goal of this map is to create a balanced games, using the history of the fir
 	</tr>
 
 	<tr bgcolor="BDBDBD">
-	<td>Recon-Plane</td>
-	<td>2</td>
-	<td>3</td>
-	<td>3</td>
-	<td>10</td>
-	<td></td>
-	<td>Gives all friendly Light-Artillery and Barrages +1 attack.</td>
-	</tr>
-
-	<tr bgcolor="BDBDBD">
 	<td>Airship</td>
 	<td>1</td>
 	<td>1</td>
 	<td>6</td>
 	<td>15</td>
 	<td></td>
-	<td>Can bomb enemy factories to reduce their income. Cannot deal more damage than the territory value.</td>
+	<td>Can bomb enemy factories to damage them. Cannot deal more damage than the territory value.</td>
 	</tr>
 
 	<tr bgcolor="ABABAB">
@@ -8872,16 +8837,6 @@ The goal of this map is to create a balanced games, using the history of the fir
 	<td>May submerge in combat, has a first strike.</td>
 	</tr>
 
-	<tr bgcolor="ABABAB">
-	<td>Battlecruiser</td>
-	<td>9</td>
-	<td>9</td>
-	<td>3</td>
-	<td>20</td>
-	<td></td>
-	<td>Can bombard land territories. Has extra movement.</td>
-	</tr>
-
 	<tr bgcolor="BDBDBD">
 	<td>Dreadnought</td>
 	<td>9</td>
@@ -8906,8 +8861,8 @@ The goal of this map is to create a balanced games, using the history of the fir
 	<td>Train</td>
 	<td></td>
 	<td></td>
-	<td>18</td>
 	<td>6</td>
+	<td>18</td>
 	<td></td>
 	<td>6 transport capacity</td>
 	</tr>
