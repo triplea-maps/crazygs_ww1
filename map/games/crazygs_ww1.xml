@@ -3693,6 +3693,17 @@
             <step name="FrancePlace" delegate="place" player="France"/>
             <step name="FranceEndTurn" delegate="endTurn" player="France"/>
 
+	<step name="ItalyCombatMove" delegate="move" player="Italy">
+		<stepProperty name="giveBonusMovement" value="false"/>
+			</step>
+            <step name="ItalyBattle" delegate="battle" player="Italy"/>
+            <step name="ItalyNonCombatMove" delegate="move" player="Italy" display="Non Combat Move">
+		<stepProperty name="giveBonusMovement" value="true"/>
+			</step>
+            <step name="ItalyPurchase" delegate="purchase" player="Italy"/>
+            <step name="ItalyPlace" delegate="place" player="Italy"/>
+            <step name="ItalyEndTurn" delegate="endTurn" player="Italy"/>
+
 	<step name="RussiaCombatMove" delegate="move" player="Russia">
 		<stepProperty name="giveBonusMovement" value="false"/>
 			</step>
@@ -3703,6 +3714,17 @@
             <step name="RussiaPurchase" delegate="purchase" player="Russia"/>
             <step name="RussiaPlace" delegate="place" player="Russia"/>
             <step name="RussiaEndTurn" delegate="endTurn" player="Russia"/>
+
+	<step name="UnitedKingdomCombatMove" delegate="move" player="UnitedKingdom">
+		<stepProperty name="giveBonusMovement" value="false"/>
+			</step>
+            <step name="UnitedKingdomBattle" delegate="battle" player="UnitedKingdom"/>
+            <step name="UnitedKingdomNonCombatMove" delegate="move" player="UnitedKingdom" display="Non Combat Move">
+		<stepProperty name="giveBonusMovement" value="true"/>
+			</step>
+            <step name="UnitedKingdomPurchase" delegate="purchase" player="UnitedKingdom"/>
+            <step name="UnitedKingdomPlace" delegate="place" player="UnitedKingdom"/>
+            <step name="UnitedKingdomEndTurn" delegate="endTurn" player="UnitedKingdom"/>
 
 	<step name="Austria-HungaryCombatMove" delegate="move" player="Austria-Hungary">
 		<stepProperty name="giveBonusMovement" value="false"/>
@@ -3725,28 +3747,6 @@
             <step name="OttomanEmpirePurchase" delegate="purchase" player="OttomanEmpire"/>
             <step name="OttomanEmpirePlace" delegate="place" player="OttomanEmpire"/>
             <step name="OttomanEmpireEndTurn" delegate="endTurn" player="OttomanEmpire"/>
-
-	<step name="UnitedKingdomCombatMove" delegate="move" player="UnitedKingdom">
-		<stepProperty name="giveBonusMovement" value="false"/>
-			</step>
-            <step name="UnitedKingdomBattle" delegate="battle" player="UnitedKingdom"/>
-            <step name="UnitedKingdomNonCombatMove" delegate="move" player="UnitedKingdom" display="Non Combat Move">
-		<stepProperty name="giveBonusMovement" value="true"/>
-			</step>
-            <step name="UnitedKingdomPurchase" delegate="purchase" player="UnitedKingdom"/>
-            <step name="UnitedKingdomPlace" delegate="place" player="UnitedKingdom"/>
-            <step name="UnitedKingdomEndTurn" delegate="endTurn" player="UnitedKingdom"/>
-
-	<step name="ItalyCombatMove" delegate="move" player="Italy">
-		<stepProperty name="giveBonusMovement" value="false"/>
-			</step>
-            <step name="ItalyBattle" delegate="battle" player="Italy"/>
-            <step name="ItalyNonCombatMove" delegate="move" player="Italy" display="Non Combat Move">
-		<stepProperty name="giveBonusMovement" value="true"/>
-			</step>
-            <step name="ItalyPurchase" delegate="purchase" player="Italy"/>
-            <step name="ItalyPlace" delegate="place" player="Italy"/>
-            <step name="ItalyEndTurn" delegate="endTurn" player="Italy"/>
 
 			<step name="endRoundStep" delegate="endRound"/>
 
