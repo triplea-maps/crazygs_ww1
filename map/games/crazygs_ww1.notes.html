@@ -1,0 +1,400 @@
+New World War 1 Attempt<br/>
+<br/>
+Credits:
+<br/>Primary map design and XML by Crazy G.
+<br/>Unit art by Frostion.
+<br/>Unit and map art by Hepps.
+<br/>
+The goal of this map is to create a balanced game, using the history of the first world war as inspiration.
+
+<table border="2"bgcolor="ABABAB">
+	<tr>
+	<th style="font-size:100%;000000"bgcolor="CEF6F5"colspan="2">
+
+<br/>Special Features:
+<br/>Several "new" weapons that showcase lesser known features.
+<br/>Minor nations will join the war as the game goes on.
+<br/>The Kiel Canal, in German controlled Denmark connects sea zones 27 and 51.
+<br/>Railroads and trains play an important role in this conflict!
+<br/>Air battles occur before land combat. Aircraft boost land unit strength
+<br/>Airships can bomb factories. Recon Planes can escort or intercept those bombing raids.
+
+</th>
+
+</table>
+
+<table border="2"bgcolor="ABABAB">
+	<tr>
+	<th style="font-size:120%;000000"bgcolor="CEF6F5"colspan="2">Nations in Turn Order</th>
+
+	<tr bgcolor="ABABAB">
+	<th>Central Powers</th>
+	<th>TripleEntente</th>
+	</tr>
+	
+	<tr bgcolor="ABABAB">
+	<td>Germany</td>
+	<td></td>
+	</tr>
+
+	<tr bgcolor="BDBDBD">
+	<td></td>
+	<td>France</td>
+	</tr>
+
+	<tr bgcolor="BDBDBD">
+	<td></td>
+	<td>Italy (skips first turn)</td>
+	</tr>
+
+	<tr bgcolor="ABABAB">
+	<td></td>
+	<td>Russia</td>
+	</tr>
+	<tr bgcolor="BDBDBD">
+	<td></td>
+	<td>United Kingdom</td>
+	</tr>
+
+	<tr bgcolor="BDBDBD">
+	<td>Austria-Hungary</td>
+	<td></td>
+	</tr>
+	<tr bgcolor="ABABAB">
+	<td>Ottoman_Empire</td>
+	<td></td>
+	</tr>
+
+
+</table>
+
+<br/>
+<br/>
+<table border="1"bgcolor="ABABAB">
+	<tr>
+	<th style="font-size:120%;000000"bgcolor="CEF6F5"colspan="7">Available Units</th>
+	</tr>
+
+	<tr bgcolor="ABABAB">
+	<th>Unit Name</th>
+	<th>ATK</th>
+	<th>DEF</th>
+	<th>Move</th>
+	<th>Cost</th>
+	<th>CarryCost</th>
+	<th>Special</th>
+	</tr>
+	
+	<tr bgcolor="BDBDBD">
+	<td>Infantry</td>
+	<td>3</td>
+	<td>4</td>
+	<td>1</td>
+	<td>5</td>
+	<td>2</td>
+	<td></td>
+	</tr>
+
+	<tr bgcolor="ABABAB">
+	<td>Light-Artillery</td>
+	<td>5</td>
+	<td>5</td>
+	<td>1</td>
+	<td>7</td>
+	<td>3</td>
+	<td></td>
+	</tr>
+
+	<tr bgcolor="ABABAB">
+	<td>Cavalry</td>
+	<td>4</td>
+	<td>3</td>
+	<td>2</td>
+	<td>7</td>
+	<td>3</td>
+	<td>Can blitz</td>
+	</tr>
+
+	<tr bgcolor="BDBDBD">
+	<td>Recon-Plane</td>
+	<td>2</td>
+	<td>3</td>
+	<td>3</td>
+	<td>10</td>
+	<td></td>
+	<td>Gives all friendly Light-Artillery +1 attack</td>
+	</tr>
+
+	<tr bgcolor="ABABAB">
+	<td>Gas</td>
+	<td>0</td>
+	<td>0</td>
+	<td>3</td>
+	<td>10</td>
+	<td></td>
+	<td>Suicide air unit. Gives all enemy infantry -2 defense for a single turn.</td>
+	</tr>
+
+	<tr bgcolor="BDBDBD">
+	<td>Airship</td>
+	<td>1</td>
+	<td>1</td>
+	<td>6</td>
+	<td>15</td>
+	<td></td>
+	<td>Can bomb enemy factories to damage them. Cannot deal more damage than the territory value.</td>
+	</tr>
+
+	<tr bgcolor="ABABAB">
+	<td>Cruiser</td>
+	<td>3</td>
+	<td>4</td>
+	<td>2</td>
+	<td>15</td>
+	<td></td>
+	<td>Basic Sea Unit</td>
+	</tr>
+
+	<tr bgcolor="BDBDBD">
+	<td>Transport</td>
+	<td>0</td>
+	<td>1</td>
+	<td>2</td>
+	<td>12</td>
+	<td></td>
+	<td>Carries land units. 5 Capacity</td>
+	</tr>
+
+	<tr bgcolor="BDBDBD">
+	<td>Submarine</td>
+	<td>3</td>
+	<td>2</td>
+	<td>2</td>
+	<td>12</td>
+	<td></td>
+	<td>May submerge in combat, has a first strike.</td>
+	</tr>
+
+	<tr bgcolor="BDBDBD">
+	<td>Dreadnought</td>
+	<td>9</td>
+	<td>9</td>
+	<td>2</td>
+	<td>28</td>
+	<td></td>
+	<td>2 hit points. Can bombard land territories.</td>
+	</tr>
+
+	<tr bgcolor="ABABAB">
+	<td>Factory</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td>30</td>
+	<td></td>
+	<td>Can build units up to the territory value. Can be captured.</td>
+	</tr>
+
+	<tr bgcolor="BDBDBD">
+	<td>Train</td>
+	<td></td>
+	<td></td>
+	<td>6</td>
+	<td>18</td>
+	<td></td>
+	<td>6 transport capacity</td>
+	</tr>
+
+	<tr bgcolor="ABABAB">
+	<td>Railroad</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td>8</td>
+	<td></td>
+	<td>Allows trains to move.</td>
+	</tr>
+
+	<tr bgcolor="ABABAB">
+	<td>Tank</td>
+	<td>8</td>
+	<td>8</td>
+	<td>2</td>
+	<td>12</td>
+	<td></td>
+	<td>Can Blitz. Can be built starting on turn 5.</td>
+	</tr>
+
+	<th>Unit Name</th>
+	<th>ATK</th>
+	<th>DEF</th>
+	<th>Move</th>
+	<th>Cost</th>
+	<th>Special</th>
+	</tr>
+<tr>
+</table>
+<br>
+<table border="1"bgcolor="ABABAB">
+	<tr>
+	<th style="font-size:120%;000000"bgcolor="CEF6F5"colspan="4">Minor Nations</th>
+	</tr>
+	<tr>
+	<th style="font-size:100%;000000"bgcolor="CEF6F5"colspan="4">These minor nations will automatically join a major power on a certain turn.</th>
+	</tr>
+
+	<tr bgcolor="ABABAB">
+	<th>Nation</th>
+	<th>Central Power</th>
+	<th>Entente Power</th>
+	<th></th>
+	</tr>
+	
+	<tr bgcolor="ABABAB">
+	<td>Bulgaria</td>
+	<td>Austria-Hungary</td>
+	<td></td>
+	<td>Joins Austria-Hungary at end of round 2 </td>
+	</tr>
+
+	<tr bgcolor="BDBDBD">
+	<td>Greece</td>
+	<td></td>
+	<td>UnitedKingdom</td>
+	<td>Joins the UK end of round 4</td>
+	</tr>
+
+	<tr bgcolor="ABABAB">
+	<td>Romania</td>
+	<td></td>
+	<td>Russia</td>
+	<td>Joins Russia at end of round 5</td>
+	</tr>
+
+	<tr>
+	<th style="font-size:100%;000000"bgcolor="CEF6F5"colspan="4">These Minor nations will be in future editions.</th>
+	</tr>
+
+
+	<tr bgcolor="BDBDBD">
+	<td>Arabia</td>
+	<td>OttomanEmpire</td>
+	<td>UnitedKingdom</td>
+	<td></td>
+	</tr>
+
+	<tr bgcolor="ABABAB">
+	<td>Denmark</td>
+	<td>Germany</td>
+	<td>UnitedKingdom</td>
+	<td></td>
+	</tr>
+
+	<tr bgcolor="BDBDBD">
+	<td>Netherlands</td>
+	<td>Germany</td>
+	<td>UnitedKingdom</td>
+	<td></td>
+	</tr>
+
+	<tr bgcolor="BDBDBD">
+	<td>Norway</td>
+	<td>Germany</td>
+	<td>UnitedKingdom</td>
+	<td></td>
+	</tr>
+
+	<tr bgcolor="BDBDBD">
+	<td>Portugal</td>
+	<td>Germany</td>
+	<td>UnitedKingdom</td>
+	<td></td>
+	</tr>
+
+	<tr bgcolor="ABABAB">
+	<td>Spain</td>
+	<td>Germany</td>
+	<td>France</td>
+	<td></td>
+	</tr>
+
+	<tr bgcolor="BDBDBD">
+	<td>Sweden</td>
+	<td>Germany</td>
+	<td>Russia</td>
+	<td></td>
+	</tr>
+
+</table>
+
+</body>
+</html>
+</table>
+
+<br/>
+<br/>
+<table border="1"bgcolor="ABABAB">
+	<tr>
+	<th style="font-size:120%;000000"bgcolor="CEF6F5"colspan="7">Special Units, Coming Soon</th>
+	</tr>
+	<tr bgcolor="ABABAB">
+	<td>Fighter-Plane</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	</tr>
+
+
+	<tr bgcolor="BDBDBD">
+	<td>Armored-Car</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	</tr>
+
+	<tr bgcolor="BDBDBD">
+	<td>Barrage-Balloon</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	</tr>
+
+
+	<tr bgcolor="BDBDBD">
+	<td>Harbor</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	</tr>
+
+	<tr bgcolor="ABABAB">
+	<td>Minelayer</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	</tr>
+
+	<tr bgcolor="ABABAB">
+	<td>Sea-Mine</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	</tr>
+
+	<th bgcolor="ABABAB"colspan="6">
+
+<tr>
+</body>
+</html>
